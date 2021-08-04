@@ -10,19 +10,25 @@ Transfer over & run these commands:
 -------------------------------------
 
 dos2unix yqltse_runonPACE1-40b.pbs
+
 qsub yqltse_runonPACE1-40b.pbs
 
 dos2unix yqltse_runonPACE41-87.pbs
+
 qsub yqltse_runonPACE41-87.pbs
 
 dos2unix yqltse_runonPACE89-132.pbs
+
 qsub yqltse_runonPACE89-132.pbs
 
 dos2unix yqltse_runonPACE133-175.pbs
+
 qsub yqltse_runonPACE133-175.pbs
 
 dos2unix yqltse_runonPACE177-220.pbs
+
 qsub yqltse_runonPACE177-220.pbs
 
 dos2unix yqltse_runonPACE221-262.pbs
+
 qsub yqltse_runonPACE221-262.pbs
