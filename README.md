@@ -6,7 +6,9 @@
 	I will be uploading the demuxed versions
 	Barcodes will be trimmed. Original data is available upon request.
 
-======== Transfer over & run this ==============
+Transfer over & run these commands:
+-------------------------------------
+
 dos2unix yqltse_runonPACE1-40b.pbs
 qsub yqltse_runonPACE1-40b.pbs
 
@@ -24,4 +26,3 @@ qsub yqltse_runonPACE177-220.pbs
 
 dos2unix yqltse_runonPACE221-262.pbs
 qsub yqltse_runonPACE221-262.pbs
-================================================
