@@ -1,0 +1,48 @@
+#PBS -q inferno
+#PBS -l nodes=1:ppn=2
+#PBS -l mem=16gb
+#PBS -l walltime=72:00:00
+#PBS -N yqltse_SRA_177-220
+#PBS -A GT-sbrown365
+
+cd /storage/home/hcoda1/1/czhao98/scratch/YQLTsE/2021-08-03_SRA-Upload-Yiqi_LTSE/092617YH515FSam177-220-fasta-qual-mapping-files/fasta-qual-mapping-files
+ml python
+ml anaconda3 
+ml qiime2 
+module load r
+conda activate
+python /storage/home/hcoda1/1/czhao98/scratch/YQLTsE/2021-08-03_SRA-Upload-Yiqi_LTSE/create_fastq.py
+
+gzip 092617YH515F-full.fastq
+
+qiime tools import \
+--type MultiplexedSingleEndBarcodeInSequence \
+--input-path 092617YH515F-full.fastq.gz \
+--output-path multiplexed-seqs.qza
+
+qiime cutadapt demux-single \
+--i-seqs multiplexed-seqs.qza \
+--m-barcodes-file 092617YH515F-map_fix.txt \
+--m-barcodes-column BarcodeSequence \
+--p-error-rate 0 \
+--o-per-sample-sequences demultiplexed-seqs.qza \
+--o-untrimmed-sequences untrimmed.qza \
+--verbose
+
+qiime cutadapt trim-single \
+--i-demultiplexed-sequences demultiplexed-seqs.qza \
+--p-front CAGCMGCCGCGGTAA \
+--p-error-rate 0 \
+--o-trimmed-sequences trimmed.qza \
+--verbose
+
+qiime demux summarize \
+--i-data trimmed.qza \
+--o-visualization trimmed.qzv
+
+mkdir extracted-reads
+qiime tools extract \
+  --input-path demultiplexed-seqs.qza \
+  --output-path /storage/home/hcoda1/1/czhao98/scratch/YQLTsE/2021-08-03_SRA-Upload-Yiqi_LTSE/extracted-reads/
+
+done
